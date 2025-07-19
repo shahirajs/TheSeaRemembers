@@ -1,9 +1,35 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    private static AudioManager _instance;
+    public static AudioManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject prefab = Resources.Load<GameObject>("AudioManager");
+                if (prefab != null)
+                {
+                    GameObject instanceObj = Instantiate(prefab);
+                    _instance = instanceObj.GetComponent<AudioManager>();
+                    Debug.Log("AudioManager auto-instantiated via Instance accessor.");
+                }
+                else
+                {
+                    Debug.LogWarning("AudioManager prefab not found in Resources folder.");
+                }
+            }
+            return _instance;
+        }
+        private set
+        {
+            _instance = value;
+        }
+    }
 
     public AudioSource musicSource;
     public AudioSource ambienceSource;
@@ -16,25 +42,25 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
+        if (_instance == null)
         {
-            Instance = this;
+            _instance = this;
             DontDestroyOnLoad(gameObject);
             LoadVolumeSettings();
-            PlayBackgroundAudio();
+            PlayBackgroundAudioIfSilent();
         }
-        else
+        else if (_instance != this)
         {
             Destroy(gameObject);
         }
     }
 
-    void PlayBackgroundAudio()
+    private void PlayBackgroundAudioIfSilent()
     {
-        if (defaultMusicClip != null)
+        if (!musicSource.isPlaying && defaultMusicClip != null)
             PlayMusic(defaultMusicClip);
 
-        if (defaultAmbienceClip != null)
+        if (!ambienceSource.isPlaying && defaultAmbienceClip != null)
             PlayAmbience(defaultAmbienceClip);
     }
 

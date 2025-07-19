@@ -179,7 +179,8 @@ MonoBehaviour:
   characterHideDelay: 0
   textBoxHideDelay: 0
   bellToCharacterDelay: 1
-  dessertRequestLineIndex: 1
+  dessertRequestLineIndex: 0
+  enableDessertRequest: 0
 --- !u!4 &214359441
 Transform:
   m_ObjectHideFlags: 0
@@ -958,7 +959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2897808956066210035, guid: fe562b0db97d1437eae0bd8fa15205d0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe562b0db97d1437eae0bd8fa15205d0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

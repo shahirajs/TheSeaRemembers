@@ -37,7 +37,10 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueRunning = false;
     public event System.Action OnDialogueComplete;
 
-    public int dessertRequestLineIndex = 1;
+    [Header("Mini-Game Trigger Settings")]
+    public bool enableMiniGameTrigger = false;
+    public int miniGameTriggerLineIndex = 0;
+    public string miniGameSceneName = "DessertGame";
 
     void Start()
     {
@@ -137,13 +140,15 @@ public class DialogueManager : MonoBehaviour
         currentLineIndex++;
         if (currentLineIndex < dialogueLines.Length)
         {
-            if (currentLineIndex == dessertRequestLineIndex)
+            // Check if mini-game trigger is enabled
+            if (enableMiniGameTrigger && currentLineIndex == miniGameTriggerLineIndex)
             {
                 DialogueProgressManager.ResumeLineIndex = currentLineIndex;
                 DialogueProgressManager.LastScene = SceneManager.GetActiveScene().name;
-                SceneManager.LoadScene("DessertGame");
+                SceneManager.LoadScene(miniGameSceneName);
                 return;
             }
+
             ShowLine();
         }
         else
@@ -168,10 +173,7 @@ public class DialogueManager : MonoBehaviour
 
         isDialogueRunning = false;
 
-        if (OnDialogueComplete != null)
-        {
-            OnDialogueComplete.Invoke();
-        }
+        OnDialogueComplete?.Invoke();
     }
 
     void PlayBellSound()

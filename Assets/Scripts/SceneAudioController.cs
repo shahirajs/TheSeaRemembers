@@ -10,34 +10,18 @@ public class SceneAudioController : MonoBehaviour
     {
         if (AudioManager.Instance == null)
         {
-            GameObject audioManagerPrefab = Resources.Load<GameObject>("AudioManager");
-            if (audioManagerPrefab != null)
-            {
-                Instantiate(audioManagerPrefab);
-            }
-            else
-            {
-                Debug.LogWarning("AudioManager prefab not found in Resources folder.");
-                return;
-            }
+            Debug.LogError("AudioManager could not be initialized.");
+            return;
         }
 
         if (sceneMusic != null)
         {
             AudioManager.Instance.PlayMusic(sceneMusic);
         }
-        else
-        {
-            AudioManager.Instance.StopMusic();
-        }
 
         if (sceneAmbience != null)
         {
             AudioManager.Instance.PlayAmbience(sceneAmbience);
-        }
-        else
-        {
-            AudioManager.Instance.StopAmbience();
         }
 
         if (initialSFX != null)
