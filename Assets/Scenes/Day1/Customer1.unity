@@ -165,6 +165,8 @@ MonoBehaviour:
     text: What would you like to order?
   - speakerName: Customer
     text: I'd like the cherry special
+  - speakerName: Customer
+    text: Thanks!
   textSpeed: 0.05
   typingSound: {fileID: 8300000, guid: 0946ddb167b1d43c4ad27b94ba85b920, type: 3}
   charactersPerSound: 2
@@ -177,7 +179,7 @@ MonoBehaviour:
   textBoxHideDelay: 0
   bellToCharacterDelay: 1
   enableMiniGameTrigger: 1
-  miniGameTriggerLineIndex: 5
+  miniGameTriggerLineIndex: 6
   miniGameSceneName: DessertGame
 --- !u!4 &214359441
 Transform:
