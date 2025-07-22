@@ -255,7 +255,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30201493}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -771,7 +771,7 @@ MonoBehaviour:
   timeLimit: 5
   resetDelay: 0
   timesUpDisplayDuration: 2
-  successDelay: 2
+  successDelay: 0
   successSceneName: DessertShowcase
   timerImage: {fileID: 887903745}
   timesUpImage: {fileID: 30201493}
