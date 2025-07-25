@@ -35,5 +35,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Day1/DessertShowcase.unity
     guid: 815c7075a5f2044fe868d8a746beb943
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/PauseMenu.unity
+    guid: ab0d1b2851a7240fca8a81441dbfdaa6
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

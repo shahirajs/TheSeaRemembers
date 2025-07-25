@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class SceneAudioController : MonoBehaviour
 {
@@ -6,39 +7,27 @@ public class SceneAudioController : MonoBehaviour
     public AudioClip sceneAmbience;
     public AudioClip initialSFX;
 
-    void Start()
+    IEnumerator Start()
     {
-        if (AudioManager.Instance == null)
-        {
-            Debug.LogError("AudioManager could not be initialized.");
-            return;
-        }
+        yield return new WaitUntil(() => AudioManager.Instance != null);
 
         if (sceneMusic == null)
         {
             AudioManager.Instance.StopMusic();
-            Debug.Log("SceneAudioController: Music explicitly set to none, stopping music.");
         }
         else
         {
             AudioManager.Instance.PlayMusic(sceneMusic);
-            Debug.Log("SceneAudioController: Playing scene-specific music.");
         }
 
-        if (sceneAmbience == null)
-        {
-            Debug.Log("SceneAudioController: Ambience not set, continuing previous ambience.");
-        }
-        else
+        if (sceneAmbience != null)
         {
             AudioManager.Instance.PlayAmbience(sceneAmbience);
-            Debug.Log("SceneAudioController: Playing scene-specific ambience.");
         }
 
         if (initialSFX != null)
         {
             AudioManager.Instance.PlaySFX(initialSFX);
-            Debug.Log("SceneAudioController: Playing initial SFX.");
         }
     }
 }

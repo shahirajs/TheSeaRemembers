@@ -16,11 +16,6 @@ public class AudioManager : MonoBehaviour
                 {
                     GameObject instanceObj = Instantiate(prefab);
                     _instance = instanceObj.GetComponent<AudioManager>();
-                    Debug.Log("AudioManager auto-instantiated via Instance accessor.");
-                }
-                else
-                {
-                    Debug.LogWarning("AudioManager prefab not found in Resources folder.");
                 }
             }
             return _instance;
@@ -48,6 +43,9 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             LoadVolumeSettings();
             PlayBackgroundAudioIfSilent();
+
+            if (musicSource == null || ambienceSource == null || sfxSource == null)
+                Debug.LogError("AudioManager: One or more AudioSources are not assigned.");
         }
         else if (_instance != this)
         {
@@ -90,7 +88,7 @@ public class AudioManager : MonoBehaviour
 
         float startVolume = musicSource.volume;
 
-        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        for (float t = 0; t < fadeDuration; t += Time.unscaledDeltaTime)
         {
             musicSource.volume = Mathf.Lerp(startVolume, 0, t / fadeDuration);
             yield return null;
@@ -100,7 +98,7 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = loop;
         musicSource.Play();
 
-        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        for (float t = 0; t < fadeDuration; t += Time.unscaledDeltaTime)
         {
             musicSource.volume = Mathf.Lerp(0, startVolume, t / fadeDuration);
             yield return null;
@@ -115,7 +113,7 @@ public class AudioManager : MonoBehaviour
 
         float startVolume = ambienceSource.volume;
 
-        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        for (float t = 0; t < fadeDuration; t += Time.unscaledDeltaTime)
         {
             ambienceSource.volume = Mathf.Lerp(startVolume, 0, t / fadeDuration);
             yield return null;
@@ -125,7 +123,7 @@ public class AudioManager : MonoBehaviour
         ambienceSource.loop = loop;
         ambienceSource.Play();
 
-        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        for (float t = 0; t < fadeDuration; t += Time.unscaledDeltaTime)
         {
             ambienceSource.volume = Mathf.Lerp(0, startVolume, t / fadeDuration);
             yield return null;
@@ -138,7 +136,7 @@ public class AudioManager : MonoBehaviour
     {
         float startVolume = source.volume;
 
-        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        for (float t = 0; t < fadeDuration; t += Time.unscaledDeltaTime)
         {
             source.volume = Mathf.Lerp(startVolume, 0, t / fadeDuration);
             yield return null;
