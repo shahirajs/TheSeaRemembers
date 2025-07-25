@@ -22,6 +22,19 @@ public class AlbumManager : MonoBehaviour
 
     void Start()
     {
+        if (images == null || images.Count == 0)
+        {
+            prevPageButton.interactable = false;
+            nextPageButton.interactable = false;
+            return;
+        }
+
+        if (thumbnailPrefab == null)
+        {
+            Debug.LogError("Thumbnail prefab not assigned.");
+            return;
+        }
+
         GeneratePageButtons();
         ShowPage(0);
         prevPageButton.onClick.AddListener(() => ShowPage(currentPage - 1));
@@ -37,7 +50,6 @@ public class AlbumManager : MonoBehaviour
             Button btn = child.GetComponent<Button>();
             if (btn != null)
                 btn.onClick.RemoveAllListeners();
-
             Destroy(child.gameObject);
         }
 
@@ -75,7 +87,15 @@ public class AlbumManager : MonoBehaviour
         currentPage = pageIndex;
 
         foreach (Transform child in thumbnailGrid)
+        {
             Destroy(child.gameObject);
+        }
+
+        if (thumbnailPrefab == null)
+        {
+            Debug.LogError("Thumbnail prefab is null. Cannot create thumbnails.");
+            return;
+        }
 
         int start = pageIndex * imagesPerPage;
         int end = Mathf.Min(start + imagesPerPage, images.Count);
@@ -101,5 +121,8 @@ public class AlbumManager : MonoBehaviour
             cb.normalColor = (i == pageIndex) ? Color.cyan : Color.white;
             pageButtons[i].colors = cb;
         }
+
+        prevPageButton.interactable = (currentPage > 0);
+        nextPageButton.interactable = (currentPage < maxPage);
     }
 }
