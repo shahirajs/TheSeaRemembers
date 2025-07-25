@@ -10,7 +10,6 @@ public class AlbumManager : MonoBehaviour
     public Transform thumbnailGrid;
     public GameObject fullscreenPanel;
     public Image fullscreenImage;
-
     public GameObject pageButtonPrefab;
     public Transform pageButtonContainer;
     public Button prevPageButton;
@@ -24,8 +23,8 @@ public class AlbumManager : MonoBehaviour
     {
         if (images == null || images.Count == 0)
         {
-            prevPageButton.interactable = false;
-            nextPageButton.interactable = false;
+            prevPageButton.gameObject.SetActive(false);
+            nextPageButton.gameObject.SetActive(false);
             return;
         }
 
@@ -74,6 +73,14 @@ public class AlbumManager : MonoBehaviour
                 txt.enabled = true;
             }
 
+            ButtonTextColorChange colorChange = btn.GetComponent<ButtonTextColorChange>();
+            if (colorChange != null)
+            {
+                colorChange.buttonText = txt;
+                colorChange.isActivePage = (i == currentPage);
+                colorChange.UpdateColor();
+            }
+
             pageButtons.Add(btn);
         }
     }
@@ -87,15 +94,7 @@ public class AlbumManager : MonoBehaviour
         currentPage = pageIndex;
 
         foreach (Transform child in thumbnailGrid)
-        {
             Destroy(child.gameObject);
-        }
-
-        if (thumbnailPrefab == null)
-        {
-            Debug.LogError("Thumbnail prefab is null. Cannot create thumbnails.");
-            return;
-        }
 
         int start = pageIndex * imagesPerPage;
         int end = Mathf.Min(start + imagesPerPage, images.Count);
@@ -111,18 +110,20 @@ public class AlbumManager : MonoBehaviour
             tb.fullImage = images[i];
             tb.fullScreenTargetImage = fullscreenImage;
             tb.fullScreenPanel = fullscreenPanel;
-
             thumb.GetComponent<Button>().onClick.AddListener(tb.ShowFullScreen);
         }
 
         for (int i = 0; i < pageButtons.Count; i++)
         {
-            ColorBlock cb = pageButtons[i].colors;
-            cb.normalColor = (i == pageIndex) ? Color.cyan : Color.white;
-            pageButtons[i].colors = cb;
+            ButtonTextColorChange colorChange = pageButtons[i].GetComponent<ButtonTextColorChange>();
+            if (colorChange != null)
+            {
+                colorChange.isActivePage = (i == pageIndex);
+                colorChange.UpdateColor();
+            }
         }
 
-        prevPageButton.interactable = (currentPage > 0);
-        nextPageButton.interactable = (currentPage < maxPage);
+        prevPageButton.gameObject.SetActive(currentPage > 0);
+        nextPageButton.gameObject.SetActive(currentPage < maxPage);
     }
 }

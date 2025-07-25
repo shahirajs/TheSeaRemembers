@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 4173254310829872593}
   - component: {fileID: 575767977521575822}
   - component: {fileID: 2824348089079402485}
+  - component: {fileID: 5142235582625238216}
   m_Layer: 5
   m_Name: PageButton
   m_TagString: Untagged
@@ -257,3 +258,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5142235582625238216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413146616684661377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b36d19f7cd8f435bb8fb66894413fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 809610688129958812}
+  normalColor: {r: 0.49803922, g: 0.78039217, b: 0.87058824, a: 1}
+  hoverColor: {r: 0.6509804, g: 0.9137255, b: 1, a: 1}
+  hoverSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
+  clickSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
+  hoverVolume: 0.5
+  clickVolume: 0.5
+  isActivePage: 0

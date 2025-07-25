@@ -145,12 +145,12 @@ public class AudioManager : MonoBehaviour
         }
 
         source.Stop();
-        source.volume = startVolume; // Reset volume for next play
+        source.volume = startVolume;
     }
 
     public void PlaySFX(AudioClip clip)
     {
-        sfxSource.PlayOneShot(clip);
+        sfxSource.PlayOneShot(clip, sfxSource.volume);
     }
 
     public void SetMusicVolume(float volume)
