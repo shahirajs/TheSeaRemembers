@@ -49,8 +49,10 @@ MonoBehaviour:
   - LoadScene
   - AlbumScene
   - SettingsScene
-  - PauseMenu
-  pauseMenuScene: PauseMenu
+  - SettingsScene2
+  - AlbumScene2
+  - LoadScene2
+  pauseMenuScene: SettingsScene2
 --- !u!1001 &5641689849898595496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60,8 +62,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6219507412126606907, guid: 4dcfa73ad6c824a908c257b8b2a885e0, type: 3}
+      propertyPath: pauseMenuScene
+      value: SettingsScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219507412126606907, guid: 4dcfa73ad6c824a908c257b8b2a885e0, type: 3}
       propertyPath: excludedScenes.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6219507412126606907, guid: 4dcfa73ad6c824a908c257b8b2a885e0, type: 3}
       propertyPath: 'excludedScenes.Array.data[4]'

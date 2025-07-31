@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
     public Button albumButton;
     public Button settingsButton;
     public Button quitButton;
+    public Button returnButton;
 
     void Start()
     {
@@ -22,6 +23,8 @@ public class MainMenuController : MonoBehaviour
             settingsButton = GameObject.Find("SettingsButton")?.GetComponent<Button>();
         if (quitButton == null)
             quitButton = GameObject.Find("QuitButton")?.GetComponent<Button>();
+        if (returnButton == null)
+            returnButton = GameObject.Find("ReturnButton")?.GetComponent<Button>();
 
         if (startButton != null)
             startButton.onClick.AddListener(() => SceneManager.LoadScene("Opening"));
@@ -37,6 +40,9 @@ public class MainMenuController : MonoBehaviour
 
         if (quitButton != null)
             quitButton.onClick.AddListener(QuitGame);
+
+        if (returnButton != null)
+            returnButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
     }
 
     public void QuitGame()

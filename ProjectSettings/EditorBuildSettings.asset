@@ -6,14 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu/Main Menu.unity
-    guid: 47ebaaca884594956be749356a28776e
-  - enabled: 1
     path: Assets/Scenes/MainMenu/AlbumScene.unity
     guid: 487ecdfccd9f54550bb3a1dd728d28fa
   - enabled: 1
     path: Assets/Scenes/MainMenu/LoadScene.unity
-    guid: f55634e0fc4bf40efb83b11600306a93
+    guid: d439e61511226477b9421746d3ad8330
   - enabled: 1
     path: Assets/Scenes/MainMenu/SettingsScene.unity
     guid: 75a26409a2da0470c915533ae4091a0c
@@ -36,7 +33,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Day1/DessertShowcase.unity
     guid: 815c7075a5f2044fe868d8a746beb943
   - enabled: 1
-    path: Assets/Scenes/MainMenu/PauseMenu.unity
-    guid: ab0d1b2851a7240fca8a81441dbfdaa6
+    path: Assets/Scenes/MainMenu/MainMenu.unity
+    guid: 53d3d336d270342deae530df9d2b290d
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/SettingsScene2.unity
+    guid: feb132eb5b4fd45429fbb5ed93c5a9b3
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/LoadScene2.unity
+    guid: 28aab2be1358c4f928a3e015c534ff8c
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/AlbumScene2.unity
+    guid: 3831dd0a90df9456689e810b3503fdaf
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

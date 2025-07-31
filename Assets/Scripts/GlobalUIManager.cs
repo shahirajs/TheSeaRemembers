@@ -4,16 +4,18 @@ using UnityEngine.UI;
 
 public class GlobalUIManager : MonoBehaviour
 {
-    public string[] excludedScenes = { "MainMenu", "LoadScene", "AlbumScene", "SettingsScene", "PauseMenu" };
-    public string pauseMenuScene = "PauseMenu";
+    public static GlobalUIManager Instance { get; private set; }
 
-    private static GlobalUIManager instance;
+    public string[] excludedScenes = { "MainMenu", "LoadScene", "AlbumScene", "SettingsScene", "PauseMenu" };
+    public string pauseMenuScene = "SettingsScene2";
+
     private GameObject currentMenuButton;
+    private string previousScene;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Init()
     {
-        if (instance == null)
+        if (Instance == null)
         {
             GameObject prefab = Resources.Load<GameObject>("GlobalUIManager");
             if (prefab != null)
@@ -26,9 +28,9 @@ public class GlobalUIManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += ForceSpawnButton;
             SceneManager.activeSceneChanged += ForceSpawnButtonOnSwitch;
@@ -100,7 +102,20 @@ public class GlobalUIManager : MonoBehaviour
 
     public void OnMenuButtonPressed()
     {
+        string currentScene = SceneManager.GetActiveScene().name;
+        SetPreviousScene(currentScene);
+
         Time.timeScale = 0f;
         SceneManager.LoadSceneAsync(pauseMenuScene, LoadSceneMode.Additive);
+    }
+
+    public void SetPreviousScene(string sceneName)
+    {
+        previousScene = sceneName;
+    }
+
+    public string GetPreviousScene()
+    {
+        return previousScene;
     }
 }
