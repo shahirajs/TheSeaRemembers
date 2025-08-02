@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class DialogueLine
@@ -60,8 +62,11 @@ public class DialogueManager : MonoBehaviour
     {
         if (!canProceed) return;
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame || Keyboard.current.spaceKey.wasPressedThisFrame)
         {
+            if (ClickedOnMenuButton())
+                return;
+
             if (isTyping)
             {
                 StopAllCoroutines();
@@ -73,6 +78,30 @@ public class DialogueManager : MonoBehaviour
                 NextLine();
             }
         }
+    }
+
+    bool ClickedOnMenuButton()
+    {
+        if (EventSystem.current == null)
+            return false;
+
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
+
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (var result in results)
+        {
+            if (result.gameObject.name == "MenuButton" || result.gameObject.transform.IsChildOf(GameObject.Find("MenuButton").transform))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void StartDialogue()
@@ -140,7 +169,6 @@ public class DialogueManager : MonoBehaviour
         currentLineIndex++;
         if (currentLineIndex < dialogueLines.Length)
         {
-            // Check if mini-game trigger is enabled
             if (enableMiniGameTrigger && currentLineIndex == miniGameTriggerLineIndex)
             {
                 DialogueProgressManager.ResumeLineIndex = currentLineIndex;
