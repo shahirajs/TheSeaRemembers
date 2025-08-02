@@ -144,6 +144,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 881058894054802591, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138246717780046556, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138246717780046556, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138246717780046556, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138246717780046556, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138246717780046556, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveButtonHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138246717780046556, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7002814301528032417, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
       propertyPath: m_Name
       value: ThumbnailLoadButton Variant
@@ -239,6 +267,10 @@ PrefabInstance:
     - target: {fileID: 7783440924360060719, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669856133635317061, guid: 01c3ad928f71c445fa1dcba68bd02e4d, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

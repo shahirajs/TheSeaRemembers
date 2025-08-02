@@ -2,10 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using System.IO;
 
-public class LoadManager : MonoBehaviour
+public class SaveGridManager : MonoBehaviour
 {
     public GameObject thumbnailPrefab;
     public Transform thumbnailGrid;
@@ -13,10 +11,10 @@ public class LoadManager : MonoBehaviour
     public Transform pageButtonContainer;
     public Button prevPageButton;
     public Button nextPageButton;
+    public int totalSlots = 20;
+    public int slotsPerPage = 4;
 
     private int currentPage = 0;
-    private int slotsPerPage = 4;
-    private int totalSlots = 20;
     private List<Button> pageButtons = new List<Button>();
 
     void Start()
@@ -32,7 +30,12 @@ public class LoadManager : MonoBehaviour
         int pageCount = Mathf.CeilToInt((float)totalSlots / slotsPerPage);
 
         foreach (Transform child in pageButtonContainer)
+        {
+            Button btn = child.GetComponent<Button>();
+            if (btn != null)
+                btn.onClick.RemoveAllListeners();
             Destroy(child.gameObject);
+        }
 
         pageButtons.Clear();
 
@@ -87,45 +90,27 @@ public class LoadManager : MonoBehaviour
             GameObject thumb = Instantiate(thumbnailPrefab, thumbnailGrid);
 
             TMP_Text dateText = thumb.transform.Find("dateLabel")?.GetComponent<TMP_Text>();
-            Image thumbnailImage = thumb.transform.Find("screenshot")?.GetComponent<Image>();
-            Button button = thumb.GetComponent<Button>();
-
-            if (SaveManager.SlotHasSave(slotIndex))
+            if (dateText != null)
             {
-                SaveData data = SaveManager.LoadGame(slotIndex);
-                if (dateText != null)
+                if (SaveManager.SlotHasSave(slotIndex))
                 {
-                    if (System.DateTime.TryParse(data.datetime, out System.DateTime dt))
-                        dateText.text = dt.ToString("dd/MM/yyyy\nHH:mm");
-                    else
-                        dateText.text = data.datetime;
+                    SaveData data = SaveManager.LoadGame(slotIndex);
+                    dateText.text = data.datetime;
                 }
-
-                if (thumbnailImage != null && File.Exists(data.screenshotPath))
+                else
                 {
-                    byte[] imageBytes = File.ReadAllBytes(data.screenshotPath);
-                    Texture2D texture = new Texture2D(2, 2);
-                    texture.LoadImage(imageBytes);
-
-                    Rect rect = new Rect(0, 0, texture.width, texture.height);
-                    Vector2 pivot = new Vector2(0.5f, 0.5f);
-                    Sprite sprite = Sprite.Create(texture, rect, pivot);
-
-                    thumbnailImage.sprite = sprite;
-                    thumbnailImage.preserveAspect = true;
+                    dateText.text = "Empty";
                 }
+            }
 
+            Button button = thumb.GetComponent<Button>();
+            if (button != null)
+            {
                 button.onClick.AddListener(() =>
                 {
-                    PlayerPrefs.SetString("LoadFromSlot", slotIndex.ToString());
-                    SceneManager.LoadScene(data.sceneName);
+                    SaveManager.SaveGame(slotIndex);
+                    Debug.Log($"Clicked save slot {slotIndex}");
                 });
-            }
-            else
-            {
-                if (dateText != null)
-                    dateText.text = "Empty";
-                button.interactable = false;
             }
         }
 

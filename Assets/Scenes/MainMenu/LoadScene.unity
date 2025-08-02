@@ -1007,6 +1007,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598341090}
   m_CullTransparentMesh: 1
+--- !u!1 &599379283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599379285}
+  - component: {fileID: 599379284}
+  m_Layer: 0
+  m_Name: LoadGridManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &599379284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599379283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79a0fbab9fae4575bf0762b18f231b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thumbnailPrefab: {fileID: 1209283699384565539, guid: 3f2d325aef9d84e6a9d97a5e8d99cad4, type: 3}
+  thumbnailGrid: {fileID: 1637597928}
+  pageButtonPrefab: {fileID: 1772745882}
+  pageButtonContainer: {fileID: 916363153}
+  prevPageButton: {fileID: 389086375}
+  nextPageButton: {fileID: 177973544}
+  totalSlots: 20
+  slotsPerPage: 4
+--- !u!4 &599379285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599379283}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 391.9766, y: 195.56274, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &599901090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,56 +1409,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &984520118
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 984520120}
-  - component: {fileID: 984520119}
-  m_Layer: 0
-  m_Name: LoadManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &984520119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984520118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe7b8cc2732349feb33535b848d3e97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thumbnailPrefab: {fileID: 1209283699384565539, guid: 3f2d325aef9d84e6a9d97a5e8d99cad4, type: 3}
-  thumbnailGrid: {fileID: 1637597928}
-  pageButtonPrefab: {fileID: 4413146616684661377, guid: d7f7b1c05688541ad80a385390e15030, type: 3}
-  pageButtonContainer: {fileID: 916363153}
-  prevPageButton: {fileID: 389086375}
-  nextPageButton: {fileID: 177973544}
---- !u!4 &984520120
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984520118}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 451.6494, y: 191.09293, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1064285165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,6 +2175,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de43439da09943a09258e7d41ca6330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: {fileID: 0}
+  loadButton: {fileID: 0}
+  albumButton: {fileID: 0}
+  settingsButton: {fileID: 0}
+  quitButton: {fileID: 0}
+  returnButton: {fileID: 0}
 --- !u!4 &1339039098
 Transform:
   m_ObjectHideFlags: 0
@@ -2843,6 +2851,11 @@ MonoBehaviour:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2153448324137358509, guid: 3f2d325aef9d84e6a9d97a5e8d99cad4, type: 3}
   m_PrefabInstance: {fileID: 5428875140505809782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1772745882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4413146616684661377, guid: d7f7b1c05688541ad80a385390e15030, type: 3}
+  m_PrefabInstance: {fileID: 1612878513}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1808945503
 GameObject:
@@ -3570,10 +3583,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThumbnailLoadButton
       objectReference: {fileID: 0}
-    - target: {fileID: 1498675620656278231, guid: 3f2d325aef9d84e6a9d97a5e8d99cad4, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2153448324137358509, guid: 3f2d325aef9d84e6a9d97a5e8d99cad4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3668,4 +3677,4 @@ SceneRoots:
   - {fileID: 1625486487}
   - {fileID: 251826850}
   - {fileID: 1339039098}
-  - {fileID: 984520120}
+  - {fileID: 599379285}
