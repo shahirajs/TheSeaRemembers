@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using System.IO;
 
 public class LoadGridManager : MonoBehaviour
 {
@@ -90,32 +92,49 @@ public class LoadGridManager : MonoBehaviour
             GameObject thumb = Instantiate(thumbnailPrefab, thumbnailGrid);
 
             TMP_Text dateText = thumb.transform.Find("dateLabel")?.GetComponent<TMP_Text>();
-            if (dateText != null)
-            {
-                if (SaveManager.SlotHasSave(slotIndex))
-                {
-                    SaveData data = SaveManager.LoadGame(slotIndex);
-                    dateText.text = data.datetime;
-                }
-                else
-                {
-                    dateText.text = "Empty";
-                }
-            }
-
+            Image thumbnailImage = thumb.transform.Find("screenshot")?.GetComponent<Image>();
             Button button = thumb.GetComponent<Button>();
-            if (button != null && SaveManager.SlotHasSave(slotIndex))
+
+            if (SaveManager.SlotHasSave(slotIndex))
             {
-                button.onClick.AddListener(() =>
+                SaveData data = SaveManager.LoadGame(slotIndex);
+                if (dateText != null)
+                    dateText.text = data.datetime;
+
+                if (thumbnailImage != null && File.Exists(data.screenshotPath))
                 {
-                    SaveData data = SaveManager.LoadGame(slotIndex);
-                    if (data != null)
+                    byte[] imageBytes = File.ReadAllBytes(data.screenshotPath);
+                    Texture2D texture = new Texture2D(2, 2);
+                    texture.LoadImage(imageBytes);
+
+                    Rect rect = new Rect(0, 0, texture.width, texture.height);
+                    Vector2 pivot = new Vector2(0.5f, 0.5f);
+                    Sprite sprite = Sprite.Create(texture, rect, pivot);
+
+                    thumbnailImage.sprite = sprite;
+                    thumbnailImage.preserveAspect = true;
+                    thumbnailImage.SetNativeSize();
+                }
+
+                if (button != null)
+                {
+                    button.onClick.AddListener(() =>
                     {
                         DialogueProgressManager.ResumeLineIndex = data.dialogueLineIndex;
-                        UnityEngine.SceneManagement.SceneManager.LoadScene(data.sceneName);
-                        Debug.Log($"Loaded save slot {slotIndex}");
-                    }
-                });
+                        SceneManager.LoadScene(data.sceneName);
+                    });
+                }
+            }
+            else
+            {
+                if (dateText != null)
+                    dateText.text = "Empty";
+
+                if (thumbnailImage != null)
+                    thumbnailImage.sprite = null;
+
+                if (button != null)
+                    button.interactable = false;
             }
         }
 

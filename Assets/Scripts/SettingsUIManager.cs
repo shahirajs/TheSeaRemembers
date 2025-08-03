@@ -56,7 +56,7 @@ public class SettingsUIManager : MonoBehaviour
             confirmationPopup.SetActive(false);
     }
 
-    void ShowConfirmation(string message, System.Action onConfirm)
+    public void ShowConfirmation(string message, System.Action onConfirm)
     {
         confirmationMessageText.text = message;
         confirmationPopup.SetActive(true);
@@ -74,6 +74,7 @@ public class SettingsUIManager : MonoBehaviour
 
     void OnLoad()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("LoadScene2");
     }
 
@@ -114,6 +115,4 @@ public class SettingsUIManager : MonoBehaviour
             SceneManager.LoadScene(GlobalUIManager.Instance.GetPreviousScene());
         }
     }
-
-
 }

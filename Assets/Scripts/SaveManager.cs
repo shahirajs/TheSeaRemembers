@@ -17,12 +17,12 @@ public static class SaveManager
     public static IEnumerator SaveGameCoroutine(int slot)
     {
         SaveData data = new SaveData();
-        data.sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        data.datetime = System.DateTime.Now.ToString("dd/MM/yyyy\nH:mm");
-        data.screenshotPath = ScreenshotHelper.CaptureScreenshot(slot);
+        data.sceneName = GlobalUIManager.Instance != null ? GlobalUIManager.Instance.GetPreviousScene() : UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        data.datetime = System.DateTime.Now.ToString("dd/MM/yy HH:mm");
+        data.screenshotPath = ScreenshotHelper.CopyScreenshotToSlot(slot);
         data.dialogueLineIndex = DialogueProgressManager.ResumeLineIndex;
 
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.3f);
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(GetSavePath(slot), json);

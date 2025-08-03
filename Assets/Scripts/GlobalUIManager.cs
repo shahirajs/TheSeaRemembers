@@ -20,8 +20,8 @@ public class GlobalUIManager : MonoBehaviour
             GameObject prefab = Resources.Load<GameObject>("GlobalUIManager");
             if (prefab != null)
             {
-                GameObject obj = Instantiate(prefab);
-                DontDestroyOnLoad(obj);
+                GameObject obj = Object.Instantiate(prefab);
+                Object.DontDestroyOnLoad(obj);
             }
         }
     }
@@ -67,10 +67,7 @@ public class GlobalUIManager : MonoBehaviour
 
         GameObject prefab = Resources.Load<GameObject>("MenuButton");
         if (prefab == null)
-        {
-            Debug.LogWarning("GlobalUIManager: MenuButton prefab not found in Resources folder.");
             return;
-        }
 
         GameObject canvas = GameObject.Find("Canvas");
         if (canvas == null)
@@ -104,9 +101,9 @@ public class GlobalUIManager : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
         SetPreviousScene(currentScene);
-
+        ScreenshotHelper.CaptureTemporaryScreenshot();
         Time.timeScale = 0f;
-        SceneManager.LoadSceneAsync(pauseMenuScene, LoadSceneMode.Additive);
+        SceneManager.LoadScene("LoadScene2");
     }
 
     public void SetPreviousScene(string sceneName)
