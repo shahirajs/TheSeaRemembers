@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GlobalUIManager : MonoBehaviour
 {
@@ -99,11 +100,16 @@ public class GlobalUIManager : MonoBehaviour
 
     public void OnMenuButtonPressed()
     {
-        string currentScene = SceneManager.GetActiveScene().name;
-        SetPreviousScene(currentScene);
+        SetPreviousScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(CaptureScreenshotThenOpenSettings());
+    }
+
+    IEnumerator CaptureScreenshotThenOpenSettings()
+    {
         ScreenshotHelper.CaptureTemporaryScreenshot();
+        yield return new WaitForSecondsRealtime(0.5f);
         Time.timeScale = 0f;
-        SceneManager.LoadScene("LoadScene2");
+        SceneManager.LoadSceneAsync(pauseMenuScene, LoadSceneMode.Additive);
     }
 
     public void SetPreviousScene(string sceneName)

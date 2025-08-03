@@ -100,11 +100,23 @@ public class SaveGridManager : MonoBehaviour
 
             if (button != null)
             {
-                int index = slotIndex;
-                TMP_Text text = dateText;
-                Image img = thumbnailImage;
-
-                button.onClick.AddListener(() => HandleSlotClick(index, text, img));
+                button.onClick.AddListener(() =>
+                {
+                    if (SaveManager.SlotHasSave(slotIndex))
+                    {
+                        if (settingsUIManager != null)
+                        {
+                            settingsUIManager.ShowConfirmation("Overwrite this save slot?", () =>
+                            {
+                                StartCoroutine(DelayedThumbnailUpdate(slotIndex, dateText, thumbnailImage));
+                            });
+                        }
+                    }
+                    else
+                    {
+                        StartCoroutine(DelayedThumbnailUpdate(slotIndex, dateText, thumbnailImage));
+                    }
+                });
             }
         }
 
@@ -122,39 +134,10 @@ public class SaveGridManager : MonoBehaviour
         nextPageButton.gameObject.SetActive(currentPage < maxPage);
     }
 
-    void HandleSlotClick(int slotIndex, TMP_Text dateText, Image thumbnailImage)
-    {
-        if (SaveManager.SlotHasSave(slotIndex))
-        {
-            if (settingsUIManager != null)
-            {
-                settingsUIManager.ShowConfirmation("Overwrite this save slot?", () =>
-                {
-                    StartCoroutine(DelayedThumbnailUpdate(slotIndex, dateText, thumbnailImage));
-                });
-            }
-        }
-        else
-        {
-            StartCoroutine(DelayedThumbnailUpdate(slotIndex, dateText, thumbnailImage));
-        }
-    }
-
     IEnumerator DelayedThumbnailUpdate(int slotIndex, TMP_Text dateText, Image thumbnailImage)
     {
-        yield return new WaitForSeconds(0.3f);
-
-        string copiedPath = ScreenshotHelper.CopyScreenshotToSlot(slotIndex);
-
-        SaveData data = new SaveData();
-        data.sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        data.datetime = System.DateTime.Now.ToString("dd/MM/yy HH:mm");
-        data.screenshotPath = copiedPath;
-        data.dialogueLineIndex = DialogueProgressManager.ResumeLineIndex;
-
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(SaveManager.GetSavePath(slotIndex), json);
-
+        SaveManager.SaveGame(slotIndex);
+        yield return new WaitForEndOfFrame();
         UpdateThumbnail(slotIndex, dateText, thumbnailImage);
     }
 
@@ -178,7 +161,7 @@ public class SaveGridManager : MonoBehaviour
 
                 thumbnailImage.sprite = sprite;
                 thumbnailImage.preserveAspect = true;
-                thumbnailImage.SetNativeSize();
+                thumbnailImage.gameObject.SetActive(true);
             }
         }
         else
@@ -187,7 +170,7 @@ public class SaveGridManager : MonoBehaviour
                 dateText.text = "Empty";
 
             if (thumbnailImage != null)
-                thumbnailImage.sprite = null;
+                thumbnailImage.gameObject.SetActive(false);
         }
     }
 }

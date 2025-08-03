@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class LoadGridManager : MonoBehaviour
 {
@@ -95,46 +95,20 @@ public class LoadGridManager : MonoBehaviour
             Image thumbnailImage = thumb.transform.Find("screenshot")?.GetComponent<Image>();
             Button button = thumb.GetComponent<Button>();
 
-            if (SaveManager.SlotHasSave(slotIndex))
+            UpdateThumbnail(slotIndex, dateText, thumbnailImage);
+
+            if (button != null)
             {
-                SaveData data = SaveManager.LoadGame(slotIndex);
-                if (dateText != null)
-                    dateText.text = data.datetime;
-
-                if (thumbnailImage != null && File.Exists(data.screenshotPath))
+                int index = slotIndex;
+                button.onClick.AddListener(() =>
                 {
-                    byte[] imageBytes = File.ReadAllBytes(data.screenshotPath);
-                    Texture2D texture = new Texture2D(2, 2);
-                    texture.LoadImage(imageBytes);
-
-                    Rect rect = new Rect(0, 0, texture.width, texture.height);
-                    Vector2 pivot = new Vector2(0.5f, 0.5f);
-                    Sprite sprite = Sprite.Create(texture, rect, pivot);
-
-                    thumbnailImage.sprite = sprite;
-                    thumbnailImage.preserveAspect = true;
-                    thumbnailImage.SetNativeSize();
-                }
-
-                if (button != null)
-                {
-                    button.onClick.AddListener(() =>
+                    if (SaveManager.SlotHasSave(index))
                     {
+                        SaveData data = SaveManager.LoadGame(index);
                         DialogueProgressManager.ResumeLineIndex = data.dialogueLineIndex;
                         SceneManager.LoadScene(data.sceneName);
-                    });
-                }
-            }
-            else
-            {
-                if (dateText != null)
-                    dateText.text = "Empty";
-
-                if (thumbnailImage != null)
-                    thumbnailImage.sprite = null;
-
-                if (button != null)
-                    button.interactable = false;
+                    }
+                });
             }
         }
 
@@ -150,5 +124,43 @@ public class LoadGridManager : MonoBehaviour
 
         prevPageButton.gameObject.SetActive(currentPage > 0);
         nextPageButton.gameObject.SetActive(currentPage < maxPage);
+    }
+
+    void UpdateThumbnail(int slotIndex, TMP_Text dateText, Image thumbnailImage)
+    {
+        if (SaveManager.SlotHasSave(slotIndex))
+        {
+            SaveData data = SaveManager.LoadGame(slotIndex);
+            if (dateText != null)
+                dateText.text = data.datetime;
+
+            if (thumbnailImage != null && File.Exists(data.screenshotPath))
+            {
+                byte[] imageBytes = File.ReadAllBytes(data.screenshotPath);
+                Texture2D texture = new Texture2D(2, 2);
+                texture.LoadImage(imageBytes);
+
+                Rect rect = new Rect(0, 0, texture.width, texture.height);
+                Vector2 pivot = new Vector2(0.5f, 0.5f);
+                Sprite sprite = Sprite.Create(texture, rect, pivot);
+
+                thumbnailImage.sprite = sprite;
+                thumbnailImage.preserveAspect = true;
+                thumbnailImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                if (thumbnailImage != null)
+                    thumbnailImage.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (dateText != null)
+                dateText.text = "Empty";
+
+            if (thumbnailImage != null)
+                thumbnailImage.gameObject.SetActive(false);
+        }
     }
 }

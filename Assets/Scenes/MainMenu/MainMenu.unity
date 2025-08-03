@@ -807,10 +807,12 @@ MonoBehaviour:
   buttonText: {fileID: 752853726}
   normalColor: {r: 0.5882353, g: 0.8980392, b: 0.99607843, a: 1}
   hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  activePageColor: {r: 0.898, g: 0.424, b: 0.424, a: 1}
   hoverSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   clickSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   hoverVolume: 0.5
   clickVolume: 0.5
+  isActivePage: 0
 --- !u!114 &717414066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,6 +1223,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de43439da09943a09258e7d41ca6330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: {fileID: 0}
+  loadButton: {fileID: 0}
+  albumButton: {fileID: 0}
+  settingsButton: {fileID: 0}
+  quitButton: {fileID: 0}
+  returnButton: {fileID: 0}
 --- !u!1 &978199121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,10 +1496,12 @@ MonoBehaviour:
   buttonText: {fileID: 1445661025}
   normalColor: {r: 0.569, g: 0.937, b: 1, a: 1}
   hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  activePageColor: {r: 0.898, g: 0.424, b: 0.424, a: 1}
   hoverSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   clickSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   hoverVolume: 0.5
   clickVolume: 0.5
+  isActivePage: 0
 --- !u!114 &1359380378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1779,10 +1789,12 @@ MonoBehaviour:
   buttonText: {fileID: 277703381}
   normalColor: {r: 0.569, g: 0.937, b: 1, a: 1}
   hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  activePageColor: {r: 0.898, g: 0.424, b: 0.424, a: 1}
   hoverSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   clickSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   hoverVolume: 0.5
   clickVolume: 0.5
+  isActivePage: 0
 --- !u!114 &1485012710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1932,10 +1944,12 @@ MonoBehaviour:
   buttonText: {fileID: 482091786}
   normalColor: {r: 0.569, g: 0.937, b: 1, a: 1}
   hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  activePageColor: {r: 0.898, g: 0.424, b: 0.424, a: 1}
   hoverSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   clickSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   hoverVolume: 0.5
   clickVolume: 0.5
+  isActivePage: 0
 --- !u!114 &1602953757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2085,10 +2099,12 @@ MonoBehaviour:
   buttonText: {fileID: 719616430}
   normalColor: {r: 0.569, g: 0.937, b: 1, a: 1}
   hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  activePageColor: {r: 0.898, g: 0.424, b: 0.424, a: 1}
   hoverSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   clickSound: {fileID: 8300000, guid: a5e6d9af940f94cbf9f06ab9c4c3d0c4, type: 3}
   hoverVolume: 0.5
   clickVolume: 0.5
+  isActivePage: 0
 --- !u!114 &1738278621
 MonoBehaviour:
   m_ObjectHideFlags: 0
